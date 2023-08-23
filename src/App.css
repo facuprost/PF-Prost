@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+
+.App {
+  width: 100%;
+}
+
+.navbar {
+  height: 55px;
+  background-color: rgb(121, 228, 247);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  margin-left: 15px;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+.nav-item {
+  list-style: none;
+  padding: 5px;
+}
+
+.cart-widget {
+  margin-right: 15px;
+}
+
+.item-list-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
