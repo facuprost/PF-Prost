@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "name": "BOTITAS JORDAN AIR 11 RETRO",
+        "description": "Botitas Jordan Air 11 Retro De Moda Para Hombre Código: Ct8012-116",
+        "price": "$159.999",
+        "image": "/assets/producto1.jpg"
+      },
+      {
+        "id": 2,
+        "name": "BOTITAS JORDAN AIR 11 RETRO",
+        "description": "Botitas Jordan Air 11 Retro De Moda Para Mujer Código: Ar0715-441",
+        "price": "$159.999",
+        "image": "/assets/producto2.jpg"
+      },
+      {
+        "id": 3,
+        "name": "ZAPATILLAS EQ19 RUN",
+        "description": "No importa lo lejos que vayas. Sean cuatro cuadras o cuatro kilómetros. Sea cual fuere el terreno, estas zapatillas de running adidas amortiguan cada paso gracias a la mediasuela Cloudfoam. Cuentan con excelente transpirabilidad para mantenerte fresco mientras te esfuerzas al máximo.",
+        "price": "$79.999",
+        "image": "/assets/producto3.jpg"
+      },
+      {
+        "id": 4,
+        "name": "ZAPATILLAS SUPERSTAR XLG",
+        "description": "Cuando pensabas que las zapatillas adidas Superstar no podían ser más atrevidas, este par amplifica el clásico modelo de los 70 para adaptarlo a la moda actual. Las proporciones ampliadas y el diseño llamativo se hacen patentes con las emblemáticas 3 Tiras dentadas. El exterior de cuero se mantiene fiel a sus raíces vintage a la vez que reimagina la silueta para mantener un estilo fresco. Caminá con confianza gracias a la icónica puntera.",
+        "price": "$88.499",
+        "image": "/assets/producto4.jpg"
+      },
+      {
+        "id": 5,
+        "name": "ZAPATILLAS NIKE AIR ZOOM PEGASUS 39",
+        "description": "Zapatillas Nike Air Zoom Pegasus 39 De Running Para Mujer Código: Dh4072-004",
+        "price": "$85.999",
+        "image": "/assets/producto5.jpg"
+      },
+      {
+        "id": 6,
+        "name": "ZAPATILLAS NIKE AIR WINFLO 9",
+        "description": "Zapatillas Nike Air Winflo 9 De Running Para Hombre Código: Dd6203-400",
+        "price": "$72.999",
+        "image": "/assets/producto6.jpg"
+      }
+    
+]
+  

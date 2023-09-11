@@ -1,16 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
-import './App.css';
+import ItemDetailContainer from './components/ItemDetailContainer';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  
+  const asyncMock = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000); 
+    });
+  };
+
+  useEffect(() => {
+    asyncMock().then(() => {
+      setLoading(false);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <NavBar />
-      <ItemListContainer greeting="¡Bienvenido a nuestra tienda en línea!" />
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={ItemListContainer} />
+            <Route path="/category/:id" component={ItemListContainer} />
+            <Route path="/item/:id" component={ItemDetailContainer} />
+          </Switch>
+        )}
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
+
 

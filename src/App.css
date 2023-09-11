@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: 0;
+  box-sizing: border-box; 
 }
 
 .App {
@@ -14,22 +14,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 15px; 
 }
 
 .navbar-brand {
-  margin-left: 15px;
+  font-size: 1.5rem; 
+  text-decoration: none; 
+  color: #000; 
 }
 
 .navbar-nav {
   display: flex;
+  list-style: none; 
 }
 
 .nav-item {
-  list-style: none;
-  padding: 5px;
+  padding: 0 10px; 
 }
 
 .cart-widget {
+  font-size: 1.2rem;
   margin-right: 15px;
 }
 
@@ -38,4 +42,17 @@
   display: flex;
   justify-content: center;
   text-align: center;
+}
+
+.item-list-container ul {
+  list-style: none;
+}
+
+.item-list-container li {
+  margin: 10px 0; 
+}
+
+.item-list-container a {
+  text-decoration: none; 
+  color: #333; 
 }
