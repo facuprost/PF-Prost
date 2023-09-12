@@ -1,31 +1,21 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
-import CartWidget from './CartWidget';
+import CartWidget from "./CartWidget";
+import { NavLink, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 const NavBar = () => {
-  return (
-    <nav className="navbar">
-      <Link to="/" className="navbar-brand">Amapro</Link>
-      <div className="nav-list">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/category/1" className="nav-link">Jordan</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/category/2" className="nav-link">Adidas</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/category/3" className="nav-link">Nike</Link>
-          </li>
-        </ul>
-      </div>
-      <CartWidget />
-    </nav>
-  );
-};
+
+    return (
+        <nav className="nav">
+            <NavLink to='/'><img src="/logo.png" alt="logo" className="nav-logo" /></NavLink>
+            <ul className="nav-menu">
+                <NavLink className='nav-link' to='/'>Catalogo</NavLink>
+                <NavLink className='nav-link' to='/category/jordan'>Jordan</NavLink>
+                <NavLink className='nav-link' to='/category/adidas'>Adidas</NavLink>
+                <NavLink className='nav-link' to='/category/nike'>Nike</NavLink>
+            </ul>
+            <CartWidget />
+        </nav>
+    )
+}
 
 export default NavBar;
-

@@ -1,24 +1,30 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ItemDetail } from './ItemDetail';
 
-const ItemDetailContainer = ({ products }) => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
+const mockAPI = () => {
+    return new Promise ((resolve, reject) => {
+        setTimeout(() => 
+            resolve(fetch('/products.json'))
+        , 2000);
+    })
+}
 
-  if (!product) {
-    return <div>No se encontró el producto.</div>;
-  }
+export const ItemDetailContainer = () => {
+    const { id: itemId } = useParams();
+    
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        mockAPI()
+        .then(res => res.json())
+        .then((data) => setData(data));
+    }, []);
 
-  return (
-    <div className="item-detail-container">
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-      <p>Precio: {product.price}</p>
-      <img src={product.image} alt={product.name} />
-    </div>
-  );
-};
+    const getItem = data.find(item => (item.id == itemId))
 
-export default ItemDetailContainer;
-
-
+    return (
+        <div className='detail-container'>
+            <ItemDetail data={getItem} />
+        </div>
+    )
+}

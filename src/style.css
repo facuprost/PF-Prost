@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkatra&family=Montserrat&family=Poppins:ital,wght@0,100;1,200&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    background-color: white;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
+a.active {
+    color: black;
+}
+
+.icon {
+    height: 2em;
+    will-change: filter;
+    transition: filter 300ms;
+    background-color: rgb(161, 61, 61);
+  }
+  
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(161, 61, 61);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.nav-menu {
+    background-color: rgb(161, 61, 61);
+    color: black;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: end;
+    gap: 1rem;
+}
+.nav-link {
+    background-color: grey;
+    color: white;
+}
+.nav-logo {
+    width: 100px;
+    background-color: grey;
+}
+.nav-cart {
+    background-color: grey;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+}
+.nav-cart span {
+    background-color: rgb(161, 61, 61);
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.nav a {
+    background-color: rgb(161, 61, 61);
+}
+
+.item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5rem;
+}
+.item-list {
+    display: grid;
+    grid-template-columns: repeat( 4 , 1fr);
+}
+.item {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1rem;
+}
+.item-card-img {
+    width: 100px;
+}
+
+.detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5rem;
+}
+.detail {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin: 2rem;
+    max-width: 800px;
+}
+.detail-card {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+}
+.detail-card p {
+    margin-top: 1rem;
+}
+.detail-card-img {
+    width: 150px;
+}
+
+.detail-count {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+.detail-count span {
+    margin: 1rem;
+}
+.detail-count button {
+    background-color: grey;
+    color: white;
+    font-size: 2rem;
+    width: 3rem;
+}

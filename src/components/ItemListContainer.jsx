@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import { ItemList } from "./ItemList";
+import { useState, useEffect } from "react";
+
+const mockAPI = () => {
+    return new Promise ((resolve, reject) => {
+        setTimeout(() => 
+            resolve(fetch('/products.json'))
+        , 2000);
+    })
+}
 
 const ItemListContainer = () => {
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch('/productos.json')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error al cargar los productos', error));
-  }, []);
+    const [data, setData] = useState([]);
+    
+    useEffect(() => {
+        mockAPI()
+        .then(res => res.json())
+        .then((data) => setData(data));
+    }, []);
+	
+    const {id: catId} = useParams();
+    const items = catId ? data.filter(item => item.category == catId) : data;
+    
+    return (
+        <div className="item-container">
+            <ItemList data={items} />
+        </div>
+    );
 
-  return (
-    <div className="item-list-container">
-      <h2>Lista de Productos</h2>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <Link to={`/item/${product.id}`}>{product.name}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 };
 
 export default ItemListContainer;
