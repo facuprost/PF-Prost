@@ -1,30 +1,30 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { ItemDetail } from './ItemDetail';
-
-const mockAPI = () => {
-    return new Promise ((resolve, reject) => {
-        setTimeout(() => 
-            resolve(fetch('/products.json'))
-        , 2000);
-    })
-}
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { ItemDetail } from "./ItemDetail";
+import { doc, getDoc } from "firebase/firestore"; // Importa las funciones necesarias de Firestore
+import { db } from '../firebase/firebaseConfig';
+ // Importa la instancia de Firebase
 
 export const ItemDetailContainer = () => {
-    const { id: itemId } = useParams();
-    
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        mockAPI()
-        .then(res => res.json())
-        .then((data) => setData(data));
-    }, []);
+  const { id: itemId } = useParams();
+  const [data, setData] = useState(null);
 
-    const getItem = data.find(item => (item.id == itemId))
+  useEffect(() => {
+    // Define una función asincrónica para obtener el detalle del producto desde Firestore
+    const fetchItem = async () => {
+      const itemRef = doc(db, "productos", itemId);
+      const itemDoc = await getDoc(itemRef);
+      if (itemDoc.exists()) {
+        setData({ id: itemDoc.id, ...itemDoc.data() });
+      }
+    };
 
-    return (
-        <div className='detail-container'>
-            <ItemDetail data={getItem} />
-        </div>
-    )
-}
+    fetchItem(); // Llama a la función asincrónica
+  }, [itemId]);
+
+  return (
+    <div className="detail-container">
+      <ItemDetail data={data} />
+    </div>
+  );
+};
