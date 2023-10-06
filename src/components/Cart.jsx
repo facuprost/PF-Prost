@@ -1,11 +1,11 @@
 import React from 'react';
-import { useCart } from '../context/CartContext'; // Importa useCart desde tu contexto
-import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
+import { useCart } from '../context/CartContext'; 
+import { Link } from 'react-router-dom'; 
 
 const Cart = () => {
-  const { cartItems, removeItem, clear } = useCart(); // Obtén cartItems, removeItem y clear del contexto
+  const { cartItems, removeItem, clear } = useCart(); 
 
-  // Función para calcular el precio total del carrito
+ 
   const getTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
@@ -27,6 +27,9 @@ const Cart = () => {
           <div className="cart-total">
             <span>Total: ${getTotalPrice()}</span>
           </div>
+          <Link to="/checkout" className='pagar'>
+          <button onClick={clear}>Pagar</button>
+          </Link>
           <button onClick={clear}>Vaciar Carrito</button>
         </>
       ) : (

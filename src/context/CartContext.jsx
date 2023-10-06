@@ -1,27 +1,25 @@
-import '../App.css'
-import '../App.jsx';
 import React, { createContext, useContext, useState } from "react";
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
 export function useCart() {
   return useContext(CartContext);
 }
 
-export function CartProvider({ children }) {
+export const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const addItem = (item, quantity) => {
-    // Verificar si el producto ya está en el carrito
+ 
     const existingItemIndex = cartItems.findIndex((i) => i.id === item.id);
 
     if (existingItemIndex !== -1) {
-      // Si el producto ya está en el carrito, actualiza la cantidad
+ 
       const updatedCartItems = [...cartItems];
       updatedCartItems[existingItemIndex].quantity += quantity;
       setCartItems(updatedCartItems);
     } else {
-      // Si el producto no está en el carrito, agrégalo
+    
       setCartItems([...cartItems, { ...item, quantity }]);
     }
   };

@@ -1,66 +1,68 @@
-import React, { useState } from 'react';
-import { useCart } from '../context/CartContext';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase/firebaseConfig';
+import '../style.css';
+import { useState, useContext } from "react"
+import { getFirestore, collection, addDoc } from "firebase/firestore"
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
-const Checkout = () => {
-  const { cartItems, clear } = useCart();
-  const [buyerInfo, setBuyerInfo] = useState({ name: '', phone: '', email: '' });
-  const [orderId, setOrderId] = useState(null);
-  const [orderCompleted, setOrderCompleted] = useState(false); // Agrega un estado para rastrear si la compra se ha completado
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setBuyerInfo({ ...buyerInfo, [name]: value });
-  };
+export default function Checkout() {
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [orderId, setOrderId] = useState();
+  const { cartItems, limpiarCarrito } = useContext(CartContext);
+    
 
-    // Crear la orden
+  const precioTotal = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
+  
+
+  function crearOrden() {
+    const db = getFirestore();
     const order = {
-      buyer: buyerInfo,
-      items: cartItems.map((item) => ({
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        cant: item.quantity,
-      })),
-      total: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
-    };
-
-    try {
-      // Guardar la orden en Firestore
-      const docRef = await addDoc(collection(db, 'ordenes'), order);
-      setOrderId(docRef.id);
-
-      // Limpiar el carrito
-      clear();
-
-      // Marcar la compra como completada
-      setOrderCompleted(true);
-    } catch (error) {
-      console.error('Error al guardar la orden:', error);
-    }
+      buyer: {
+       name, 
+       email,
+       phone
+    },
+    items: cartItems.map((item) => ({
+      id: item.id,
+      nombre: item.nombre,
+      precioUnitario: item.precio,
+      cantidad: item.quantity,
+    })),
+    total: precioTotal,
   };
+
+  const ordenesRef = collection(db, "ordenes");
+  addDoc(ordenesRef, order).then(result => setOrderId(result.id))
+ }
+
+ if(orderId) {
+  return (
+    <>
+  <h5 style={{margin: "100px"}}>{`Gracias por tu compra, tu orden es: ${orderId}`}</h5>
+  <Link to="/">
+   <button onClick={limpiarCarrito} className="btn btn-success" type="button">Volver al catálogo</button>
+  </Link>
+  </>
+  )
+ }
 
   return (
-    <div className="checkout-container">
-      {orderCompleted ? (
-        <div>
-          <h2>¡Gracias por tu compra!</h2>
-          <p>Tu número de orden es: {orderId}</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h2>Checkout</h2>
-          {/* Resto del formulario aquí */}
-          <button type="submit">Finalizar compra</button>
-        </form>
-      )}
-    </div>
-  );
-};
+    <form onSubmit={(e) => e.preventDefault()}>
+      <label>Nombre</label>
+      <input type="text" value={name} onChange={(event) => setName(event.target.value)} />
+      <label>Email</label>
+      <input type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
+      <label>Telefono</label>
+      <input type="text" value={phone} onChange={(event) => setPhone(event.target.value)} />
+      <button onClick={crearOrden} >Finalizar compra</button>
+    </form>
+  )
+}
 
-export default Checkout;
 
